@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Statblock example</title>
+
+  <link rel="import" href="src/top-stats.html">
+  <link rel="import" href="src/creature-heading.html">
+  <link rel="import" href="src/abilities-block.html">
+  <link rel="import" href="src/property-block.html">
+  <link rel="import" href="src/property-line.html">
+  <link rel="import" href="src/stat-block.html">
+
+  <style>
+    body {
+      margin: 0;
+    }
+
+    stat-block {
+      /* A bit of margin for presentation purposes, to show off the drop
+        shadow. */
+      margin-left: 20px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <stat-block data-two-column data-content-height="624">
+    <creature-heading>
+      <h1>Yedris Nightvale</h1>
+      <h2>Medium human wizard 6, unaligned</h2>
+    </creature-heading>
+
+    <top-stats>
+      <property-line>
+        <h4>Armor Class</h4>
+        <p>13 (+1 Dex, +1 Cloak of Protection, +1 Staff of Magius)</p>
+      </property-line>
+      <property-line>
+        <h4>Hit Points</h4>
+        <p>12 (6d6 - 12)</p>
+      </property-line>
+      <property-line>
+        <h4>Speed</h4>
+        <p>30ft</p>
+      </property-line>
+
+      <abilities-block data-str="6" data-dex="12" data-con="6" data-int="20" data-wis="16" data-cha="15"></abilities-block>
+
+      <property-line>
+        <h4>Proficiencies</h4>
+        <p>
+          (+3 proficiency bonus)
+        </p>
+      </property-line>
+      <property-line>
+        <h4>Saving Throws</h4>
+        <p>Int (+8), Wis (+6)</p>
+      </property-line>
+      <property-line>
+        <h4>Skills</h4>
+        <p>
+          Arcana +8, History +8, Medicine +6, Religion +8
+        </p>
+      </property-line>
+      <property-line>
+        <h4>Armor</h4>
+        <p>none</p>
+      </property-line>
+      <property-line>
+        <h4>Weapons</h4>
+        <p>
+          dagger, darts, slings, quarterstaffs, light crossbows
+        </p>
+      </property-line>
+      <property-line>
+        <h4>Tools</h4>
+        <p>none</p>
+      </property-line>
+      <property-line>
+        <h4>Senses</h4>
+        <p>Passive Perception 11</p>
+      </property-line>
+      <property-line>
+        <h4>Languages</h4>
+        <p>Common, Elvish (Qualinesti), Dwarvish (Neidar)</p>
+      </property-line>
+    </top-stats>
+
+    <h3>Wizard Features</h3>
+
+    <property-block>
+      <h4>Arcane Recovery</h4>
+      <p>Once per day when you finish a Short Rest, you can choose expended Spell Slots to recover. The Spell Slots can have a combined level that is equal to or less than half your wizard level (rounded up), and none of the slots can be 6th level or higher.</p>
+    </property-block>
+
+    <property-block>
+      <h4>Arcane Tradition</h4>
+      <p>School of Transmutation</p>
+    </property-block>
+
+    <property-line>
+      <h4>Spell Save DC:</h4>
+      <p>16</p>
+    </property-line>
+
+    <property-line>
+      <h4>Spell Attack Modifier:</h4>
+      <p>+8</p>
+    </property-line>
+
+    <property-block>
+      <h4>Spell Slots</h4>
+      <p>Cantrips (4), 1st level (4), 2nd level (3), 3rd level (3)</p>
+      <p><i>Cantrips: </i>Fire bolt, Ray of Frost, Acid Splash, Poison Spray</p>
+    </property-block>
+
+    <!-- <h3>Arcane Tradition: School of Transmutation</h3>
+
+    <property-block>
+      <h4>Transmutation Savant</h4>
+      <p>Beginning when you select this school at 2nd level, the gold and time you must spend to copy a transmutation spell into your spellbook is halved.</p>
+    </property-block>
+
+    <property-block>
+      <h4>Minor Alchemy</h4>
+      <p>Starting at 2nd level when you select this school, you can temporarily alter the physical properties o f one nonmagical object, changing it from one substance into another. You perform a special alchemical procedure on one object composed entirely
+        o f wood, stone (but not a gemstone), iron, copper, or silver, transforming it into a different one o f those materials. For each 10 minutes you spend performing the procedure, you can transform up to 1 cubic foot o f material. After 1 hour, or
+        until you lose your concentration (as if you w ere concentrating on a spell), the material reverts to its original substance.</p>
+    </property-block>
+
+    <property-block>
+      <h4>Transmuter’s Stone</h4>
+      <p>Starting at 6th level, you can spend 8 hours creating a transmuter’s stone that stores transmutation magic. You can benefit from the stone yourself or give it to another creature. A creature gains a benefit o f your choice as long as the stone is
+        in the creature’s possession. When you create the stone, choose the benefit from the following options:
+        <ul>
+          <li> Darkvision out to a range o f 60 feet, as described in chapter 8</li>
+          <li> An increase to speed o f 10 feet while the creature is unencumbered
+          </li>
+          <li> Proficiency in Constitution saving throws</li>
+          <li> Resistance to acid, cold, fire, lightning, or thunder damage (your choice whenever you choose this benefit)
+          </li>
+        </ul>
+
+        Each time you cast a transmutation spell o f 1st level or higher, you can change the effect o f your stone if the stone is on your person. If you create a new transmuter’s stone, the previous one ceases to function.</p>
+    </property-block> -->
+
+    <h3>Staff of Magius</h3>
+
+    <property-block>
+      <p>The staff of Magius can be wielded as a magic quarterstaff that grants a +1 bonus to attack and damage rolls. While you hold it, it provides a +1 bonus to armor class. The staff has 20 charges for the following properties. It regains 1d4+4 expended
+        charges at night in the light of Solinari.</p>
+    </property-block>
+
+    <property-line>
+      <h4>Spells</h4>
+      <p>While holding the staff, you can use an action to expend 1 or more charges to cast one of the following spells from it, using your spell save DC and spell attack bonus: feather fall (1 charge) or light (1 charge). When used
+        by a wizard that has passed a Test of High Sorcery and used as an arcane focus, the staff doubles spell durations, and adds 1 damage point to all die rolls for each spell.
+      </p>
+    </property-line>
+
+    <property-block>
+      <h4></h4>
+      <p></p>
+    </property-block>
+
+    <h3>Spells in Spellbook</h3>
+
+    <property-block>
+      <h4>1st level: </h4>
+      <p>Burning Hands, Charm Person, Hellish Rebuke, Mage Armor, Thunderwave, Shield, Comprehend Languages, Magic Missile</p>
+    </property-block>
+
+    <property-block>
+      <h4>2nd level: </h4>
+      <p>Blur, Blindness/Deafness, Scorching Ray, Crown of Madness</p>
+    </property-block>
+    <property-block>
+      <h4>3rd level: </h4>
+      <p>Fireball, Fear, Lightning Bolt, Feign Death, Water walk </p>
+    </property-block>
+
+    <h3>Equipment</h3>
+    Staff of Magius, Dagger of Magius (+2 attack and damage rolls; cannot be found when carried by a wizard), red robes, backpack, bedroll, herbalism kit, magnifying glass, sack, scrolls, ink, writing supplies, spellbook, Dark-blue spellbook.
+  </stat-block>
+</body>
+
+</html>

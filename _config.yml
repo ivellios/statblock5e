@@ -1,0 +1,8 @@
+title: Statblock5e
+description: "A Web Component statblock for D&D 5E "
+google_analytics: 
+show_downloads: true
+theme: jekyll-theme-slate
+
+gems:
+  - jekyll-mentions

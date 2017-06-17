@@ -1,3 +1,3 @@
 Generated blockstats are:
 
-* Yedris Nightvale
+* [Yedris Nightvale](generated_npcs/yedris.html)

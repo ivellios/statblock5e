@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Kapak Draconian</title>
+
+    <link rel="import" href="../src/top-stats.html">
+    <link rel="import" href="../src/creature-heading.html">
+    <link rel="import" href="../src/abilities-block.html">
+    <link rel="import" href="../src/property-block.html">
+    <link rel="import" href="../src/property-line.html">
+    <link rel="import" href="../src/stat-block.html">
+
+    <style>
+        body {
+            margin: 0;
+        }
+
+        stat-block {
+            /* A bit of margin for presentation purposes, to show off the drop
+              shadow. */
+            margin-left: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+<stat-block data-two-column data-content-height="480">
+    <creature-heading>
+        <h1>Kapak Draconian Fighter</h1>
+        <h2>medium dragon (draconian), chaotic evil</h2>
+    </creature-heading>
+
+    <top-stats>
+        <property-line>
+            <h4>Armor Class</h4>
+            <p>13</p>
+        </property-line>
+        <property-line>
+            <h4>Hit Points</h4>
+            <p>52</p>
+        </property-line>
+        <property-line>
+            <h4>Speed</h4>
+            <p>30ft</p>
+        </property-line>
+
+        <abilities-block data-str="12" data-dex="15" data-con="14" data-int="8" data-wis="8" data-cha="11"></abilities-block>
+
+        <property-line>
+            <h4>Proficiencies</h4>
+            <p>
+                (+3 proficiency bonus)
+            </p>
+        </property-line>
+        <property-line>
+            <h4>Saving Throws</h4>
+            <p>Con (+5), Dex (+5)</p>
+        </property-line>
+
+        <property-line>
+            <h4>Skills</h4>
+            <p>
+                Perception +2, Stealth +5
+            </p>
+        </property-line>
+
+        <property-line>
+            <h4>Senses</h4>
+            <p>darkvision 120ft, passive Perception 12</p>
+        </property-line>
+        <property-line>
+            <h4>Languages</h4>
+            <p>Common, Draconic</p>
+        </property-line>
+        <property-line>
+            <h4>Challange</h4>
+            <p>
+                3 (700 XP)
+            </p>
+        </property-line>
+    </top-stats>
+
+    <property-block>
+            <h4>Glide</h4>
+            <p>
+                 The kapak can use its wings to glide, negating any damage from a fall of any height. It can also travel horizontally up to four times the vertical distance it descends.
+            </p>
+    </property-block>
+
+    <property-block>
+            <h4>Death Throes</h4>
+            <p>
+                 When the kapak dies, its body instantly dissolves into a 5-foot radius pool of acid. All creatures within this area suffer 8 (2d8) points of acid damage each round they remain in the pool. The acid evaporates in 1 minute. All armor, weapons, an items carried by the kapak suffer damage from the acid as well.</p>
+    </property-block>
+
+    <property-block>
+            <h4>Poison</h4>
+            <p>
+                 The kapak’s poison doesn’t affect other kapaks.
+            </p>
+    </property-block>
+
+    <property-block>
+            <h4>Sneak Attack (1/turn)</h4>
+            <p>
+                 The kapak deals an extra 14 (4d6) damage when it hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 feet of an ally of the kapak that isn’t incapacitated and the kapak doesn’t have disadvantage on the roll.
+            </p>
+    </property-block>
+
+    <h3>Actions</h3>
+
+    <property-line>
+        <h4>Multiattack</h4>
+        Kapak Fighter makes two melee or ranged attacks with weapon.
+    </property-line>
+
+    <property-line>
+        <h4>Shortsword</h4>
+        <p>
+            Melee Weapon Attack: +6 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 1) piercing damage and the target must make a DC 13 Constitution saving throw, becoming poisoned and paralyzed on a failed save for 10 minutes.
+        </p>
+    </property-line>
+
+    <property-line>
+        <h4>Bite</h4>
+        <p>
+            Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 5 (1d6 + 1) piercing damage and the target must make a DC 13 Constitution saving throw, becoming poisoned and paralyzed on a failed save for 10 minutes.
+        </p>
+    </property-line>
+
+    <property-line>
+        <h4>Claws</h4>
+        <p>
+            Melee Weapon Attack: +3 to hit, reach 5 ft., one target. Hit: 4 (1d6 + 1) slashing damage.
+        </p>
+    </property-line>
+
+    <property-line>
+        <h4>Shortbow</h4>
+        <p>
+            Ranged Weapon Attack: +6 to hit, range 80/320 ft., one target. Hit: 5 (1d6 + 2) piercing damage.
+        </p>
+    </property-line>
+
+</stat-block>
+
+</body>
+
+</html>

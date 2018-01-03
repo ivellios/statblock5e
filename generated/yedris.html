@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html><head><link href="//fonts.googleapis.com/css?family=Libre+Baskerville:700" rel="stylesheet" type="text/css"/><link href="//fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic" rel="stylesheet" type="text/css"/><meta charset="utf-8"/><title>Yedris Nightvale</title><style>
+        body {
+            margin: 0;
+        }
+
+        stat-block {
+            /* A bit of margin for presentation purposes, to show off the drop
+              shadow. */
+            margin-left: 20px;
+            margin-top: 20px;
+        }
+    </style></head><body><template id="tapered-rule">
+  <style>
+    svg {
+      fill: #922610;
+      /* Stroke is necessary for good antialiasing in Chrome. */
+      stroke: #922610;
+      margin-top: 0.6em;
+      margin-bottom: 0.35em;
+    }
+  </style>
+  <svg height="5" width="400">
+    <polyline points="0,0 400,2.5 0,5"></polyline>
+  </svg>
+</template><script>
+(function(window, document) {
+  var elemName = 'tapered-rule';
+  var thatDoc = document;
+  var thisDoc = (thatDoc.currentScript || thatDoc._currentScript).ownerDocument;
+  var proto = Object.create(HTMLElement.prototype, {
+    createdCallback: {
+      value: function() {
+        var template = thisDoc.getElementById(elemName);
+        var clone = thatDoc.importNode(template.content, true);
+        this.createShadowRoot().appendChild(clone);
+      }
+    }
+  });
+  thatDoc.registerElement(elemName, {prototype: proto});
+})(window, document);
+</script><template id="top-stats">
+  <style>
+    ::content * {
+      color: #7A200D;
+    }
+  </style>
+
+  <tapered-rule></tapered-rule>
+  <content></content>
+  <tapered-rule></tapered-rule>
+</template><script>
+(function(window, document) {
+  var elemName = 'top-stats';
+  var thatDoc = document;
+  var thisDoc = (thatDoc.currentScript || thatDoc._currentScript).ownerDocument;
+  var proto = Object.create(HTMLElement.prototype, {
+    createdCallback: {
+      value: function() {
+        var template = thisDoc.getElementById(elemName);
+        var clone = thatDoc.importNode(template.content, true);
+        this.createShadowRoot().appendChild(clone);
+      }
+    }
+  });
+  thatDoc.registerElement(elemName, {prototype: proto});
+})(window, document);
+</script><template id="creature-heading">
+  <style>
+    ::content > h1 {
+      font-family: 'Libre Baskerville', 'Lora', 'Calisto MT',
+                   'Bookman Old Style', Bookman, 'Goudy Old Style',
+                   Garamond, 'Hoefler Text', 'Bitstream Charter',
+                   Georgia, serif;
+      color: #7A200D;
+      font-weight: 700;
+      margin: 0px;
+      font-size: 23px;
+      letter-spacing: 1px;
+      font-variant: small-caps;
+    }
+
+    ::content > h2 {
+      font-weight: normal;
+      font-style: italic;
+      font-size: 12px;
+      margin: 0;
+    }
+  </style>
+  <content select="h1"></content>
+  <content select="h2"></content>
+</template><script>
+(function(window, document) {
+  var elemName = 'creature-heading';
+  var thatDoc = document;
+  var thisDoc = (thatDoc.currentScript || thatDoc._currentScript).ownerDocument;
+  var proto = Object.create(HTMLElement.prototype, {
+    createdCallback: {
+      value: function() {
+        var template = thisDoc.getElementById(elemName);
+        var clone = thatDoc.importNode(template.content, true);
+        this.createShadowRoot().appendChild(clone);
+      }
+    }
+  });
+  thatDoc.registerElement(elemName, {prototype: proto});
+})(window, document);
+</script><template id="abilities-block">
+  <style>
+    table {
+      width: 100%;
+      border: 0px;
+      border-collapse: collapse;
+    }
+    th, td {
+      width: 50px;
+      text-align: center;
+    }
+  </style>
+  <tapered-rule></tapered-rule>
+  <table>
+    <tbody><tr>
+      <th>STR</th>
+      <th>DEX</th>
+      <th>CON</th>
+      <th>INT</th>
+      <th>WIS</th>
+      <th>CHA</th>
+    </tr>
+    <tr>
+      <td id="str"></td>
+      <td id="dex"></td>
+      <td id="con"></td>
+      <td id="int"></td>
+      <td id="wis"></td>
+      <td id="cha"></td>
+    </tr>
+  </tbody></table>
+  <tapered-rule></tapered-rule>
+</template><script>
+(function(window, document) {
+  function abilityModifier(abilityScore) {
+    var score = parseInt(abilityScore, 10);
+    return Math.floor((score - 10) / 2);
+  }
+
+  function formattedModifier(abilityModifier) {
+    if (abilityModifier >= 0) {
+      return '+' + abilityModifier;
+    }
+    // This is an en dash, NOT a "normal" dash. The minus sign needs to be more
+    // visible.
+    return '–' + Math.abs(abilityModifier);
+  }
+
+  function abilityText(abilityScore) {
+    return [String(abilityScore),
+            ' (',
+            formattedModifier(abilityModifier(abilityScore)),
+            ')'].join('');
+  }
+
+  var elemName = 'abilities-block';
+  var thatDoc = document;
+  var thisDoc = (thatDoc.currentScript || thatDoc._currentScript).ownerDocument;
+  var proto = Object.create(HTMLElement.prototype, {
+    createdCallback: {
+      value: function() {
+        var template = thisDoc.getElementById(elemName);
+        var clone = thatDoc.importNode(template.content, true);
+        var root = this.createShadowRoot().appendChild(clone);
+      }
+    },
+    attachedCallback: {
+      value: function() {
+        var root = this.shadowRoot;
+        for (var i = 0; i < this.attributes.length; i++) {
+          var attribute = this.attributes[i];
+          var abilityShortName = attribute.name.split('-')[1];
+          root.getElementById(abilityShortName).textContent =
+             abilityText(attribute.value);
+        }
+
+      }
+    }
+  });
+  thatDoc.registerElement(elemName, {prototype: proto});
+})(window, document);
+</script><template id="property-block">
+  <style>
+    :host {
+      margin-top: 0.3em;
+      margin-bottom: 0.9em;
+      line-height: 1.5;
+      display: block;
+    }
+
+    ::content > h4 {
+      margin: 0;
+      display: inline;
+      font-weight: bold;
+      font-style: italic;
+    }
+
+    ::content > p:first-of-type {
+      display: inline;
+      text-indent: 0;
+    }
+
+    ::content > p {
+      text-indent: 1em;
+      margin: 0;
+    }
+  </style>
+  <content></content>
+</template><script>
+(function(window, document) {
+  var elemName = 'property-block';
+  var thatDoc = document;
+  var thisDoc = (thatDoc.currentScript || thatDoc._currentScript).ownerDocument;
+  var proto = Object.create(HTMLElement.prototype, {
+    createdCallback: {
+      value: function() {
+        var template = thisDoc.getElementById(elemName);
+        var clone = thatDoc.importNode(template.content, true);
+        this.createShadowRoot().appendChild(clone);
+      }
+    }
+  });
+  thatDoc.registerElement(elemName, {prototype: proto});
+})(window, document);
+</script><template id="property-line">
+  <style>
+    :host {
+      line-height: 1.4;
+      display: block;
+      text-indent: -1em;
+      padding-left: 1em;
+    }
+
+    ::content > h4 {
+      margin: 0;
+      display: inline;
+      font-weight: bold;
+    }
+
+    ::content > p:first-of-type {
+      display: inline;
+      text-indent: 0;
+    }
+
+    ::content > p {
+      text-indent: 1em;
+      margin: 0;
+    }
+  </style>
+  <content></content>
+</template><script>
+(function(window, document) {
+  var elemName = 'property-line';
+  var thatDoc = document;
+  var thisDoc = (thatDoc.currentScript || thatDoc._currentScript).ownerDocument;
+  var proto = Object.create(HTMLElement.prototype, {
+    createdCallback: {
+      value: function() {
+        var template = thisDoc.getElementById(elemName);
+        var clone = thatDoc.importNode(template.content, true);
+        this.createShadowRoot().appendChild(clone);
+      }
+    }
+  });
+  thatDoc.registerElement(elemName, {prototype: proto});
+})(window, document);
+</script><template id="stat-block">
+  <style>
+    .bar {
+      height: 5px;
+      background: #E69A28;
+      border: 1px solid #000;
+      position: relative;
+      z-index: 1;
+    }
+
+    :host {
+      display: inline-block;
+    }
+
+    #content-wrap {
+      font-family: 'Noto Sans', 'Myriad Pro', Calibri, Helvetica, Arial,
+                    sans-serif;
+      font-size: 13.5px;
+      background: #FDF1DC;
+      padding: 0.6em;
+      padding-bottom: 0.5em;
+      border: 1px #DDD solid;
+      box-shadow: 0 0 1.5em #867453;
+
+      /* We don't want the box-shadow in front of the bar divs. */
+      position: relative;
+      z-index: 0;
+
+      /* Leaving room for the two bars to protrude outwards */
+      margin-left: 2px;
+      margin-right: 2px;
+
+      /* This is possibly overriden by next CSS rule. */
+      width: 400px;
+
+      -webkit-columns: 400px;
+         -moz-columns: 400px;
+              columns: 400px;
+      -webkit-column-gap: 40px;
+         -moz-column-gap: 40px;
+              column-gap: 40px;
+
+      /* When height is constrained, we want sequential filling of columns. */
+      -webkit-column-fill: auto;
+         -moz-column-fill: auto;
+              column-fill: auto;
+    }
+
+    :host([data-two-column]) #content-wrap {
+      /* One column is 400px and the gap between them is 40px. */
+      width: 840px;
+    }
+
+    ::content > h3 {
+      border-bottom: 1px solid #7A200D;
+      color: #7A200D;
+      font-size: 21px;
+      font-variant: small-caps;
+      font-weight: normal;
+      letter-spacing: 1px;
+      margin: 0;
+      margin-bottom: 0.3em;
+
+      break-inside: avoid-column;
+      break-after: avoid-column;
+    }
+
+    /* For user-level p elems. */
+    ::content > p {
+      margin-top: 0.3em;
+      margin-bottom: 0.9em;
+      line-height: 1.5;
+    }
+
+    /* Last child shouldn't have bottom margin, too much white space. */
+    ::content > *:last-child {
+      margin-bottom: 0;
+    }
+  </style>
+  <div class="bar"></div>
+  <div id="content-wrap">
+    <content></content>
+  </div>
+  <div class="bar"></div>
+</template><script>
+(function(window, document) {
+  var elemName = 'stat-block';
+  var thatDoc = document;
+  var thisDoc = (thatDoc.currentScript || thatDoc._currentScript).ownerDocument;
+  var proto = Object.create(HTMLElement.prototype, {
+    createdCallback: {
+      value: function() {
+        var template = thisDoc.getElementById(elemName);
+        // If the attr() CSS3 function were properly implemented, we wouldn't
+        // need this hack...
+        if (this.hasAttribute('data-content-height')) {
+          var wrap = template.content.getElementById('content-wrap');
+          wrap.style.height = this.getAttribute('data-content-height') + 'px';
+        }
+        var clone = thatDoc.importNode(template.content, true);
+        this.createShadowRoot().appendChild(clone);
+      }
+    }
+  });
+  thatDoc.registerElement(elemName, {prototype: proto});
+})(window, document);
+</script>
+
+
+
+
+<stat-block data-content-height="1000" data-two-column="">
+    <creature-heading>
+        <h1>Yedris Nightvale</h1>
+        <h2>Medium human wizard 9, unaligned</h2>
+    </creature-heading>
+
+    <top-stats>
+        <property-line>
+            <h4>Armor Class</h4>
+            <p>14 (+1 Dex, +1 Cloak of Protection, +2 Staff of Magius)</p>
+        </property-line>
+        <property-line>
+            <h4>Hit Points</h4>
+            <p>23 (9d6 - 18)</p>
+        </property-line>
+        <property-line>
+            <h4>Speed</h4>
+            <p>30ft</p>
+        </property-line>
+
+        <abilities-block data-cha="15" data-con="7" data-dex="12" data-int="20" data-str="6" data-wis="16"></abilities-block>
+
+        <property-line>
+            <h4>Proficiencies</h4>
+            <p>
+                (+4 proficiency bonus)
+            </p>
+        </property-line>
+        <property-line>
+            <h4>Saving Throws</h4>
+            <p>Str (0), Dex (+3), Con (0), Int (+11), Wis (+9), Cha (+4)</p>
+        </property-line>
+        <property-line>
+            <h4>Skills</h4>
+            <p>
+                Arcana +8, History +8, Medicine +6, Religion +8
+            </p>
+        </property-line>
+        <property-line>
+            <h4>Weapons</h4>
+            <p>
+                dagger, darts, slings, quarterstaffs, light crossbows
+            </p>
+        </property-line>
+        <property-line>
+            <h4>Senses</h4>
+            <p>Passive Perception 11</p>
+        </property-line>
+        <property-line>
+            <h4>Languages</h4>
+            <p>Common, Elvish (Qualinesti), Dwarvish (Neidar)</p>
+        </property-line>
+    </top-stats>
+
+    <h3>Wizard Features</h3>
+
+    <property-block>
+        <h4>Arcane Recovery</h4>
+        <p>Once per day when you finish a Short Rest, you can choose expended Spell Slots to recover. The Spell Slots can have a combined level that is equal to or less than half your wizard level (rounded up), and none of the slots can be 6th level or higher.</p>
+    </property-block>
+
+    <property-block>
+        <h4>Arcane Tradition</h4>
+        <p>School of Transmutation</p>
+    </property-block>
+
+    <property-line>
+        <h4>Spell Save DC:</h4>
+        <p>17</p>
+    </property-line>
+
+    <property-line>
+        <h4>Spell Attack Modifier:</h4>
+        <p>+9</p>
+    </property-line>
+
+    <property-line>
+        <h4>Prepared spells:</h4>
+        <p>14</p>
+    </property-line>
+
+    <property-block>
+        <h4>Spell Slots</h4>
+        <p>Cantrips (4), 1st level [   ][   ][   ][   ],<br/>
+            2nd level [   ][   ][   ],
+            3rd level [   ][   ][   ],<br/>
+            4rd level [   ][   ][   ],
+            5th level [   ]</p>
+    </property-block>
+
+    <h3>Arcane Tradition: School of Transmutation</h3>
+
+    <property-block>
+        <h4>Transmutation Savant</h4>
+        <p>Beginning when you select this school at 2nd level, the gold and time you must spend to copy a transmutation spell into your spellbook is halved.</p>
+    </property-block>
+
+    <property-block>
+        <h4>Minor Alchemy</h4>
+        <p>You can temporarily alter the physical properties o f one nonmagical object, changing it from one substance into another. You can transform wood, stone (but not a gemstone), iron, copper, or silver. 10 minutes/1 cubic foot. Duration 1h or concentration.</p>
+    </property-block>
+
+    <property-block>
+        <h4>Transmuter’s Stone</h4>
+        <p>Starting at 6th level, you can spend 8 hours creating a transmuter’s stone that stores transmutation magic.</p>
+    </property-block>
+    <h3>Staff of Magius</h3>
+
+    <property-block>
+        <p>The staff of Magius can be wielded as a magic quarterstaff that grants a +2 bonus to attack and damage rolls. While you hold it, it provides a +2 bonus to armor class. The staff has 12 charges for the following properties. It regains 1d4+4 expended
+            charges at night in the light of Solinari. The staff doubles spell durations, and adds 1 damage point to all die rolls for each spell.</p>
+    </property-block>
+
+    <property-block>
+        <h4>Secrets</h4>
+        <p> The Staff has hidden powers. DM should roll a d20. On a 18-20, a random effect occurs, rolled from the list below on 1d12. Attempt a DC 15 Intelligence (Arcana) check to master the effect.</p>
+        <p>
+            1) Daylight (3 charges), 2) Darkness (2 charges), 3) Detect Magic (1 charge), 6) Magic Missile (1 charge), 8) Levitate (2 charges), 10) Dispel Magic (3 charges), 11) Invisibility (2 charges)
+        </p>
+    </property-block>
+
+    <property-block>
+        <h4>Found secrets</h4>
+        <p>Spells already discovered: Feather Fall (1 charge) or Light (1 charge), Enlarge/Reduce (2 charges), Gust of Wind (2 charges), Knock (2 charges), Lightning Bolt (5th level varsion, 5 charges), Protection from Evil &amp; Good (1 charge)</p>
+    </property-block>
+
+    <h3>Spells in Spellbook</h3>
+
+    <property-block>
+        <h4>1st level: </h4>
+        <p>Burning Hands, Charm Person, Hellish Rebuke, Mage Armor, Thunderwave, Shield, Comprehend Languages, Magic Missile, Detect Magic, </p>
+    </property-block>
+
+    <property-block>
+        <h4>2nd level: </h4>
+        <p>Blur, Blindness/Deafness, Scorching Ray, Crown of Madness, Gust of Wind, Levitate, Invisibility, Arcane Lock, Enlarge/Reduce, Darkness, Knock,</p>
+    </property-block>
+    <property-block>
+        <h4>3rd level: </h4>
+        <p>Fireball, Fear, Lightning Bolt, Feign Death, Vampiric Touch, Water walk </p>
+    </property-block>
+    <property-block>
+        <h4>4th level: </h4>
+        <p>Phantasmal Killer, Fire Shield, Wall of Fire</p>
+    </property-block>
+    <property-block>
+        <h4>5th level: </h4>
+        <p>Dominate Person</p>
+    </property-block>
+
+    <h3>Equipment</h3>
+    Staff of Magius, Dagger of Magius (+2 attack and damage rolls; cannot be found when carried by a wizard), red robes, backpack, bedroll, herbalism kit, magnifying glass, sack, scrolls, ink, writing supplies, spellbook, Dark-blue spellbook.
+</stat-block></body></html>
